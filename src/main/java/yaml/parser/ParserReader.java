@@ -27,6 +27,8 @@
 package yaml.parser;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
+import java.util.Map;
 
 /** A character Reader with some additional functionality.<br>
 
@@ -74,37 +76,36 @@ import java.io.Reader;
 
 public final class ParserReader
 {
-        Reader reader;
+        private final Reader reader;
         int c;
-        char[] buffer;                          /* used for mark(), unmark() and reset() operations */
+        final StringBuilder  buffer;         /* used for mark(), unmark() and reset() operations */
         int index, fileIndex,level;
         int eofIndex;                           /* where in buffer[] is the eof */
-        int[] mark;
-        final int BUFLEN = 120000;				/* this constant determines how much lookahead we can have */
-
+        final Map<Integer,Integer> mark;
+   
         public ParserReader(Reader reader)
         {
             this.reader = reader;
-            buffer = new char[BUFLEN];           // maximum mark-reset range. Circular buffer !
-            buffer[buffer.length-1] = 0;       // correct response from previous() after start.
+            buffer = new StringBuilder();
             index = 0;
             fileIndex = 0;
             level = 0;
             eofIndex = -1;
-            mark = new int[1000];
+            mark = new HashMap<Integer,Integer>();
         }
+        
 
         /** return a string begining at the last mark() untill the current position */
 
         public String string()
         {
-                int begin = mark[level-1];
+                int begin = mark.get(level-1);// mark[level-1];
                 int end = index;
 
                 if (begin > end)
-                    return new String(buffer,begin,BUFLEN-begin) + new String(buffer,0,end);
+                    throw new IllegalStateException();
                 else
-                    return new String(buffer,begin,end-begin);
+                    return buffer.substring(begin,end);
         }
 
         /** read and return one character from the stream.
@@ -120,23 +121,25 @@ public final class ParserReader
         public int read() throws IOException
         {
             if (index == eofIndex) {
+                if( index < buffer.length()){
+                c = (int) buffer.charAt(index);    
+                }
                 index++;
                 return -1;
             }
-            else if (index != (fileIndex % BUFLEN)) // assuming index  < fileIndex
-                c = (int) buffer[index];
-            else { // assuming index == fileIndex
-                if (eofIndex != -1) return -1;
 
+            if (eofIndex == -1 &&  index < buffer.length() ){
+                c = (int) buffer.charAt(index);        
+            }else   { // assuming index == fileIndex
+                if (eofIndex != -1) return -1;
                 c = reader.read();
-                fileIndex++;
-                if (c == -1)
+                if (c == -1){
                     eofIndex = index;
-                buffer[index] = (char) c;
+                }
+                fileIndex++;
+                buffer.append( (char)c);
             }
             index++;
-            if (index >= BUFLEN)
-                index = 0;
             return c;
         }
 
@@ -153,19 +156,14 @@ public final class ParserReader
 
         public int previous()
         {
-            if (index == 0)
-                return (int) buffer[BUFLEN-2];
-            else if (index == 1)
-                return (int) buffer[BUFLEN-1];
-            else
-                return (int) buffer[index-2];
+             return index<=1  || index >= buffer.length() ? -1 :   buffer.charAt(index-2);
         }
 
         /** remember the current position for a future reset() */
 
         public void mark()
         {
-            mark[level] = index;
+            mark.put(level, index);
             level++;
         }
 
@@ -181,7 +179,7 @@ public final class ParserReader
         public void reset()
         {
             unmark();
-            index = mark[level];
+            index = mark.get(level);
         }
 
         /** unread one character.  */
@@ -189,9 +187,8 @@ public final class ParserReader
         public void unread()
         {
                 index--;
-//                if (index == mark[level-1])
-//                    throw new IndexOutOfBoundsException("too much unreads");
-                if (index < 0)
-                    index = BUFLEN - 1;
+                if(index < 0 ){
+                    index=0;
+                }
         }
 }
