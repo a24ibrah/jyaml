@@ -1,0 +1,9 @@
+--- 
+- 1
+- a
+- 3
+- 4
+- !java.lang.Object[]
+  - a
+- !org.ho.yaml.tests.Person
+  name: Mike Dell

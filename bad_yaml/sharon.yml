@@ -1,0 +1,32 @@
+--- !test.Element
+nodes: !java.util.ArrayList
+ - 
+  node: !test.Node
+   id: node1_id
+   class_id: 10001
+   name: node1 
+   layer: 1
+   parent: null
+   coordinates: !test.Coordinates
+    x: 0.0
+    y: 0.0
+ -
+  node: !test.Node
+   id: node2_id
+   class_id: 10002
+   name: node2
+   layer: 2
+   parent: node1_id
+   coordinates: !test.Coordinates
+    x: 0.1
+    y: 0.2
+ -
+  node: !test.Node
+   id: node3_id
+   class_id: 10003
+   name: node3
+   layer: 2
+   parent: node1_id
+   coordinates: !test.Coordinates
+    x: 0.2
+    y: 0.3

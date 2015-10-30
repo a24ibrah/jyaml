@@ -1,0 +1,23 @@
+hardware setup        : standalone
+parameterconfiguration: standalone
+
+startposisjon: idle
+
+
+script: >
+	operator chooses 1 (Purchase) from menu
+	terminal asks for amount
+	operator enters amount 42.00
+	terminal asks for payment card
+	customer swipes card
+
+	terminal asks for pin
+	customer enters pin
+	terminal sends message to host
+	terminal receives message from host
+	terminal shows message "APPROVED"
+	terminal prints receiptw with amount 42.00
+
+
+transaksjon history:
+	-	amount: 42.00

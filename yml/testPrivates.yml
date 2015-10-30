@@ -1,0 +1,3 @@
+--- !org.ho.yaml.tests.IntegrationTests$PrivateFields
+svalue: five
+value: 5

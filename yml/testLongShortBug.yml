@@ -1,0 +1,3 @@
+--- !org.ho.yaml.tests.LongShort
+longVal: !java.lang.Long 5000000000
+shortVal: !java.lang.Short 123

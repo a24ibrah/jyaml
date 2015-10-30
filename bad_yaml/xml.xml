@@ -1,0 +1,10 @@
+<div class="gm-app-header">
+<table>
+<tr>
+<td style="padding-right: 50px;">
+<h1>Calendar</h1>
+Dates that have events are underlined on the calendar. Click the date to see the events for that day.
+</td>
+</tr>
+</table>
+</div>

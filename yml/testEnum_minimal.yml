@@ -1,0 +1,16 @@
+--- 
+- !org.ho.yaml.tests.IntegrationTests$Card
+  points: 3
+  suit: &3 SPADE
+- !org.ho.yaml.tests.IntegrationTests$Card
+  points: 12
+  suit: DIAMOND
+- !org.ho.yaml.tests.IntegrationTests$Card
+  points: 1
+  suit: CLUB
+- !org.ho.yaml.tests.IntegrationTests$Card
+  points: 5
+  suit: HEART
+- !org.ho.yaml.tests.IntegrationTests$Card
+  points: 9
+  suit: *3

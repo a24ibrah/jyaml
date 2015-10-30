@@ -1,0 +1,21 @@
+--- !org.ho.yaml.YamlConfig
+encoding: ISO-8859-1
+handlers: 
+    java.awt.Dimension: org.ho.yaml.wrapper.DimensionWrapper
+    java.util.Date: !org.ho.yaml.wrapper.DateWrapper {}
+    java.io.File: !org.ho.yaml.wrapper.OneArgConstructorTypeWrapper
+        argType: java.lang.String
+        type: !java.lang.Class java.io.File
+    java.math.BigDecimal: !org.ho.yaml.wrapper.OneArgConstructorTypeWrapper
+        argType: java.lang.String
+        type: !java.lang.Class java.math.BigDecimal
+    java.lang.Class: org.ho.yaml.wrapper.ClassWrapper
+    java.awt.Point: org.ho.yaml.wrapper.PointWrapper
+    java.awt.Color: org.ho.yaml.wrapper.ColorWrapper
+    java.math.BigInteger: !org.ho.yaml.wrapper.OneArgConstructorTypeWrapper
+        argType: java.lang.String
+        type: !java.lang.Class java.math.BigInteger
+indentAmount: "    "
+suppressWarnings: true
+transfers: !org.ho.util.BiDirectionalMap
+    person: org.ho.yaml.tests.Person

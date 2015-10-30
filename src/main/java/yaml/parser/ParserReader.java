@@ -121,14 +121,14 @@ public final class ParserReader
         public int read() throws IOException
         {
             if (index == eofIndex) {
-                if( index < buffer.length()){
-                c = (int) buffer.charAt(index);    
-                }
+//                if( index < buffer.length()){
+//                c = (int) buffer.charAt(index);    
+//                }
                 index++;
                 return -1;
             }
 
-            if (eofIndex == -1 &&  index < buffer.length() ){
+            if ( index < buffer.length() ){
                 c = (int) buffer.charAt(index);        
             }else   { // assuming index == fileIndex
                 if (eofIndex != -1) return -1;

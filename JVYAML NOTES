@@ -1,0 +1,15 @@
+- Dates become Private Types
+- ints become longs
+- HashSet not handled well
+- arrays not handled
+- alias with nulls?
+- using excessive references
+- no default value handling for JavaBeans
+- no public fields
+- no recursive references
+- no support for Enums
+- File object
+- contructure access scope
+- serialization of classes
+- basic/primitive type handling
+- negative numbers don't work

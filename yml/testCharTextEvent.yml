@@ -1,0 +1,4 @@
+--- 
+- !org.ho.yaml.tests.TextEvent
+  char: " "
+  timestamp: !java.lang.Long 1446209046768

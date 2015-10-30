@@ -1,0 +1,3 @@
+--- &0 !org.ho.yaml.tests.Circular
+i: 3
+other: *0

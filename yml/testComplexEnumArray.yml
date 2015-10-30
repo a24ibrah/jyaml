@@ -1,0 +1,10 @@
+--- !org.ho.yaml.tests.IntegrationTests$Planet[]
+- !org.ho.yaml.tests.IntegrationTests$Planet MERCURY
+- !org.ho.yaml.tests.IntegrationTests$Planet VENUS
+- !org.ho.yaml.tests.IntegrationTests$Planet EARTH
+- !org.ho.yaml.tests.IntegrationTests$Planet MARS
+- !org.ho.yaml.tests.IntegrationTests$Planet JUPITER
+- !org.ho.yaml.tests.IntegrationTests$Planet SATURN
+- !org.ho.yaml.tests.IntegrationTests$Planet URANUS
+- !org.ho.yaml.tests.IntegrationTests$Planet NEPTUNE
+- !org.ho.yaml.tests.IntegrationTests$Planet PLUTO

@@ -1,0 +1,18 @@
+--- !org.ho.yaml.tests.Company
+assets: !java.math.BigDecimal 2000045.40
+departmentArray: !org.ho.yaml.tests.Department[]
+  - !org.ho.yaml.tests.Department
+    name: Engineering
+  - !org.ho.yaml.tests.Department
+    name: Sales
+  - !org.ho.yaml.tests.Department
+    name: Marketing
+name: Microsoft Corporation
+president: !org.ho.yaml.tests.Person
+  age: 40
+  name: Tony Hawk
+  netWorth: !java.math.BigDecimal 238943443.00
+  salary: !java.lang.Double 120000.0
+  spouse: !org.ho.yaml.tests.Person
+    name: Mrs. Hawk
+yearsInOperation: !java.lang.Long 12

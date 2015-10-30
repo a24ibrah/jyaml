@@ -1,0 +1,9 @@
+--- 
+array: !org.ho.yaml.tests.Department[]
+  - 
+    name: Engineering
+  - 
+    name: Sales
+  - 
+    name: Marketing
+string: hello world

@@ -1,0 +1,3 @@
+--- !org.ho.yaml.tests.IntegrationTests$ProtectedFields
+svalue: five
+value: 5

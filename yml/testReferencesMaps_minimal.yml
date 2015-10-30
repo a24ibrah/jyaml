@@ -1,0 +1,5 @@
+--- 
+m1: &1 !java.util.HashMap
+  one: &2 1
+one: *2
+m1again: *1

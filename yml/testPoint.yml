@@ -1,0 +1,3 @@
+--- !java.awt.Point
+x: !java.lang.Double 1.0
+y: !java.lang.Double 2.0

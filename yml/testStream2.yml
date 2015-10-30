@@ -1,0 +1,6 @@
+--- !org.ho.yaml.tests.Company
+assets: !java.math.BigDecimal 2000045.40
+name: Microsoft Corporation
+--- !org.ho.yaml.tests.Company
+assets: !java.math.BigDecimal 2000045.40
+name: Microsoft Corporation

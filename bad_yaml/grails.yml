@@ -1,0 +1,150 @@
+--- !grails.dbmapper.model.Database
+tables:
+  - &10 !grails.dbmapper.model.Table
+    keys: !java.util.HashMap$Values
+      - &12 !grails.dbmapper.model.PrimaryKey
+
+        columns:
+          - &1 !grails.dbmapper.model.Column
+            comments: ""
+            columnSize: 20
+            defaultValue: ~
+            nativeSqlType: bigint
+
+            ordinalPosition: 1
+            metaClass: &3 !groovy.lang.MetaClassImpl {}
+            name: id
+            nullable: false
+            javaSqlType: -5
+        metaClass: &6 !groovy.lang.MetaClassImpl {}
+
+        name: PRIMARY
+    importedKeys: []
+    columns:
+      - *1
+      - !grails.dbmapper.model.Column
+        comments: ""
+
+        columnSize: 20
+        defaultValue: "0"
+        nativeSqlType: bigint
+        ordinalPosition: 2
+        metaClass: *3
+        name: version
+
+        nullable: false
+        javaSqlType: -5
+      - !grails.dbmapper.model.Column
+        comments: ""
+        columnSize: 255
+        defaultValue: ""
+
+        nativeSqlType: varchar
+        ordinalPosition: 3
+        metaClass: *3
+        name: name
+        nullable: false
+        javaSqlType: 12
+
+    metaClass: &2 !groovy.lang.MetaClassImpl {}
+    name: author
+  - !grails.dbmapper.model.Table
+    keys: !java.util.HashMap$Values []
+    importedKeys:
+      - !grails.dbmapper.model.ForeignKey
+
+        colMappings: !java.util.LinkedHashMap
+          authors_id: *1
+        deleteRule: ~
+        upateRule: ~
+        refTable: *10
+        metaClass: &11 !groovy.lang.MetaClassImpl {}
+
+        refPk: *12
+        deferrable: ~
+      - !grails.dbmapper.model.ForeignKey
+        colMappings: !java.util.LinkedHashMap
+          books_id: &4 !grails.dbmapper.model.Column
+            comments: ""
+
+            columnSize: 20
+            defaultValue: ~
+            nativeSqlType: bigint
+            ordinalPosition: 1
+            metaClass: *3
+            name: id
+
+            nullable: false
+            javaSqlType: -5
+        deleteRule: ~
+        upateRule: ~
+        refTable: &5 !grails.dbmapper.model.Table
+          keys: !java.util.HashMap$Values
+
+            - &9 !grails.dbmapper.model.PrimaryKey
+              columns:
+                - *4
+              metaClass: *6
+              name: PRIMARY
+          importedKeys: []
+
+          columns:
+            - *4
+            - !grails.dbmapper.model.Column
+              comments: ""
+              columnSize: 20
+              defaultValue: "0"
+
+              nativeSqlType: bigint
+              ordinalPosition: 2
+              metaClass: *3
+              name: version
+              nullable: false
+              javaSqlType: -5
+
+            - !grails.dbmapper.model.Column
+              comments: ""
+              columnSize: 255
+              defaultValue: ""
+              nativeSqlType: varchar
+              ordinalPosition: 3
+
+              metaClass: *3
+              name: title
+              nullable: false
+              javaSqlType: 12
+          metaClass: *2
+          name: book
+
+        metaClass: *11
+        refPk: *9
+        deferrable: ~
+    columns:
+      - &8 !grails.dbmapper.model.Column
+        comments: ""
+
+        columnSize: 20
+        defaultValue: ~
+        nativeSqlType: bigint
+        ordinalPosition: 1
+        metaClass: *3
+        name: authors_id
+        nullable: true
+
+        javaSqlType: -5
+      - &7 !grails.dbmapper.model.Column
+        comments: ""
+        columnSize: 20
+        defaultValue: ~
+        nativeSqlType: bigint
+
+        ordinalPosition: 2
+        metaClass: *3
+        name: books_id
+        nullable: true
+        javaSqlType: -5
+    metaClass: *2
+
+    name: author_book
+  - *5
+metaClass: !groovy.lang.MetaClassImpl {}

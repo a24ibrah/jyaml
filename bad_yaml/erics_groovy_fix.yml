@@ -1,0 +1,26 @@
+---
+table: Employees
+columns:
+ - column: id
+   type: int
+   constraints:
+     - constraint: primary key
+     - constraint: not null
+     - constraint: identity
+       start: 100
+       increment: 1
+ - column: name
+   type: string
+   constraints:
+     - constraint: length
+       min: 1
+       max: 50
+     - constraint: not null
+ - column: convictions
+   type: int
+   comment: Number of legal convictions
+   constraints:
+     - constraint: value
+       min: 0
+     - constraint: not null
+   default: 0

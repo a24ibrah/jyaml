@@ -1,0 +1,10 @@
+--- 
+- 
+  node: !test.Node
+   id: node1_id
+-
+  node: !test.Node
+   id: node2_id
+-
+  node: !test.Node
+   id: node3_id

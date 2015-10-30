@@ -1,0 +1,18 @@
+--- 
+assets: 2000045.40
+departments: 
+  - !org.ho.yaml.tests.Department
+    name: Engineering
+  - !org.ho.yaml.tests.Department
+    name: Sales
+  - !org.ho.yaml.tests.Department
+    name: Marketing
+name: Microsoft Corporation
+president: 
+  age: 40
+  name: Tony Hawk
+  netWorth: 238943443.00
+  salary: 120000.0
+  spouse: 
+    name: Mrs. Hawk
+yearsInOperation: 12
