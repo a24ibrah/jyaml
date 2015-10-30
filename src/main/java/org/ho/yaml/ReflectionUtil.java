@@ -370,7 +370,12 @@ public class ReflectionUtil {
 	public static boolean isSimpleType(Class c){
 	    return c.isPrimitive() || c == String.class || c == Integer.class ||
 	    c == Long.class || c == Short.class || c == Double.class || c == Float.class ||
-	    c == Boolean.class || c == Character.class || c == Byte.class;
+	    c == Boolean.class || c == Character.class;
+//        || 
+//	    c == BigInteger.class || c == BigDecimal.class ;
+//        || 
+//	    c == Date.class || c == File.class ||
+//	    c.isEnum();
 	}
 
 	public static boolean isCastableFrom(Class from, Class to){

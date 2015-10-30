@@ -38,7 +38,7 @@ import org.ho.yaml.wrapper.ObjectWrapper;
 
 class MapState extends State {
 
-	Object key;
+	String key;
 
 	MapState(Map<String, ObjectWrapper> aliasMap, Stack<State> stack, YamlDecoder decoder, Logger logger) {
 		super(aliasMap, stack, decoder, logger);
@@ -51,17 +51,14 @@ class MapState extends State {
 	@Override
 	public void nextOnContent(String type, String content) {
 		if (key == null)
-			if ("value".equals(type))
-				key = Utilities.decodeSimpleType(content);
-			else
-				key = content;
+			key = content;
 		else {
 			ObjectWrapper newObject = null;
             if ("alias".equals(type)){
                 String alias = content.substring(1);
                 if ( aliasMap.containsKey(alias)) {
                     newObject = aliasMap.get(alias);
-                    final Object currentKey = key;
+                    final String currentKey = key;
                     newObject.addCreateHandler(new ObjectWrapper.CreateListener(){
                         public void created(Object obj) {
                             getMap().put(currentKey, obj);
@@ -72,7 +69,7 @@ class MapState extends State {
             else {
                 
                 newObject = decoder.getConfig().getWrapperSetContent(expectedType(type), content);
-                getMap().put(key, newObject.getObject());
+                getMap().put(Utilities.decodeSimpleType(key), newObject.getObject());
 			    
                 if (getAnchorname() != null)
                     markAnchor(newObject, getAnchorname());
@@ -99,7 +96,7 @@ class MapState extends State {
 
 	@Override
 	public void childCallback(ObjectWrapper child) {
-		getMap().put(key, child.getObject());
+		getMap().put(Utilities.decodeSimpleType(key), child.getObject());
 		clear();
 		key = null;
 	}

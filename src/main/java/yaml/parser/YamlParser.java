@@ -34,7 +34,8 @@ import java.io.StringReader;
 import java.util.HashMap;
 
 import org.ho.yaml.Utilities;
-import org.ho.yaml.tests.TestYamlParserEvent;
+
+
 
 /** An experimental Yaml parser.
 
@@ -137,7 +138,7 @@ public final class YamlParser
 
     /** string of characters of type 'type' */
 
-    public int array(int type) throws IOException
+    public boolean array(int type) throws IOException
     {
         mark();
 
@@ -149,16 +150,16 @@ public final class YamlParser
         if (i != 0) {
             r.unread();
             unmark();
-            return i;
+            return true;
         }
 
         reset();
-        return i;
+        return false;
     }
 
     /** space = char_space+ */
 
-    public int space() throws IOException
+    public boolean space() throws IOException
     {
         return array(YamlCharacter.SPACE);
     }
@@ -168,7 +169,7 @@ public final class YamlParser
         <p>Spaces not included !</p>
     */
 
-    public int line() throws IOException
+    public boolean line() throws IOException
     {
         return array(YamlCharacter.LINE);
     }
@@ -178,21 +179,21 @@ public final class YamlParser
         <p>Spaces included !</p>
     */
 
-    public int linesp() throws IOException
+    public boolean linesp() throws IOException
     {
         return array(YamlCharacter.LINESP);
     }
 
     /** word = char_word+  */
 
-    public int word() throws IOException
+    public boolean word() throws IOException
     {
         return array(YamlCharacter.WORD);
     }
 
     /** number = char_digit+  */
 
-    public int number() throws IOException
+    public boolean number() throws IOException
     {
         return array(YamlCharacter.DIGIT);
     }
@@ -466,7 +467,7 @@ public final class YamlParser
             return false;
         }
 
-        if (0 == word() ) {
+        if (! word() ) {
             reset();
             return false;
         }
@@ -488,7 +489,7 @@ public final class YamlParser
             return false;
         }
 
-        if (0 == word() ) {
+        if (! word() ) {
             reset();
             return false;
         }
@@ -563,7 +564,7 @@ public final class YamlParser
             return false;
         }
 
-        while ( space() > 0  && directive() );
+        while ( space()  && directive() );
 
         unmark();
         event.event(DOCUMENT_HEADER);
@@ -582,7 +583,7 @@ public final class YamlParser
             return false;
         }
 
-        if ( 0 == word() ) {
+        if ( ! word() ) {
             reset();
             return false;
         }
@@ -592,7 +593,7 @@ public final class YamlParser
             return false;
         }
 
-        if ( 0 == line() ) {
+        if (! line() ) {
             reset();
             return false;
         }
@@ -614,7 +615,7 @@ public final class YamlParser
             return false;
         }
 
-        if (0 == line() ) {
+        if (! line() ) {
             reset();
             return false;
         }
@@ -913,17 +914,16 @@ public final class YamlParser
         return false;
     }
 
-    int start_list() throws IOException{
+    boolean start_list() throws IOException{
     	r.mark();
     	if (r.read() == '-'){
-    		int space = 0;
-    		if (YamlCharacter.isLineBreakChar((char)r.current()) || (space = space()) > 0){
+    		if (YamlCharacter.isLineBreakChar((char)r.current()) || space()){
     			r.unmark();
-    			return 1 + space;
+    			return true;
     		}
     	}
     	r.reset();
-    	return 0;
+    	return false;
     	
     		
     }
@@ -932,7 +932,7 @@ public final class YamlParser
 
     public boolean nlist_entry(int n) throws IOException, SyntaxException
     {
-        if (0 == start_list()) return false;
+        if (!start_list()) return false;
 
 // System.out.println("nlist_entry");
         space();
@@ -973,7 +973,7 @@ public final class YamlParser
         sendEvents();
         event.event(MAP_SEPARATOR);
 // System.out.println("nmap_inlist()-4");
-        if (0 == space()) {
+        if (! space()) {
             reset();
             return false;
         }
@@ -1018,7 +1018,7 @@ public final class YamlParser
         if (r.current() == '\\') r.read();
 
         space();
-        if (number() > 0)
+        if (number())
             space();
 
         if (!newline()) throw new SyntaxException("No newline after block definition",line);
@@ -1164,7 +1164,7 @@ public final class YamlParser
 
         event.event(MAP_SEPARATOR);
 
-        if (0 == space())
+        if (!space())
             throw new SyntaxException("No space after ':'",line);
 
         if (!loose_value_inline())

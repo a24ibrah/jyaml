@@ -26,7 +26,7 @@ import java.util.StringTokenizer;
 
 import org.ho.yaml.exception.YamlException;
 
-public class Utilities {
+public final class Utilities {
 
     public static Object decodeSimpleType(String content){
         if ("~".equals(content)){
@@ -161,21 +161,20 @@ public class Utilities {
         if ("~".equals(value))
             return null;
         else if (type == Integer.class || type == Integer.TYPE)
-            return new Integer(value.toString());
+            return Integer.valueOf(value);
         else if (type == String.class){
             return (String)value;
         }else if (type == Long.class || type == Long.TYPE)
-            return new Long(value);
+            return Long.valueOf(value);
         else if (type == Short.class || type == Short.TYPE)
-            return new Short(value);
+            return Short.valueOf(value);
         else if (type == Double.class || type == Double.TYPE)
-            return new Double(value);
+            return  Double.valueOf(value);
         else if (type == Boolean.class || type == Boolean.TYPE)
-            return new Boolean(value);
+            return  Boolean.valueOf(value);
         else if (type == Character.class || type == Character.TYPE){
-            return new Character(value.charAt(0));
-        }else if (type == Byte.class || type ==Byte.TYPE){
-        	return new Byte(value);
+            //value = value;
+           return Character.valueOf(value.charAt(0));
         }else
             return decodeSimpleType(value);
     }
@@ -223,8 +222,6 @@ public class Utilities {
             return other.equals(one);
         else 
             return true;
-    }
-    
-    
+    }   
 
 }
